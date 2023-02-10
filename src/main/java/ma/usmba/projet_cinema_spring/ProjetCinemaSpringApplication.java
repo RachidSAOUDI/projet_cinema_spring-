@@ -1,6 +1,7 @@
 package ma.usmba.projet_cinema_spring;
 
 import ma.usmba.projet_cinema_spring.entities.Film;
+import ma.usmba.projet_cinema_spring.entities.Salle;
 import ma.usmba.projet_cinema_spring.services.CinemaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -20,8 +21,8 @@ public class ProjetCinemaSpringApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
-        restConfiguration.exposeIdsFor(Film.class);
+    public void run(String... args) {
+        restConfiguration.exposeIdsFor(Film.class,Salle.class);
         cinemaService.initVilles();
         cinemaService.initCinemas();
         cinemaService.initSalles();

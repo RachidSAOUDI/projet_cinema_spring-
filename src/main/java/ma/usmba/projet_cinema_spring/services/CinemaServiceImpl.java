@@ -68,7 +68,7 @@ public class CinemaServiceImpl implements CinemaService {
                 Salle salle = new Salle();
                 salle.setName("Salle "+(i+1));
                 salle.setCinema(cinema);
-                salle.setNombrePlace(50+(int)(Math.random()*30));
+                salle.setNombrePlace(20+(int)(Math.random()*30));
                 salleRepository.save(salle);
             }
         });
@@ -127,10 +127,12 @@ public class CinemaServiceImpl implements CinemaService {
     @Override
     public void initPresentations() {
         double[] prices=new double[] {30,50,60,70,90};
+        List<Film> films=filmRepository.findAll();
         villeRepository.findAll().forEach(ville -> {
             ville.getCinemas().forEach(cinema -> {
                 cinema.getSalles().forEach(salle -> {
-                    filmRepository.findAll().forEach(film -> {
+                    int index=new Random().nextInt(films.size());
+                    Film film=films.get(index);
                         seanceRepository.findAll().forEach(seance -> {
                             Presentation presentation =new Presentation();
                             presentation.setDatePresentation(new Date());
@@ -143,7 +145,6 @@ public class CinemaServiceImpl implements CinemaService {
                     });
                 });
             });
-        });
     }
 
     @Override

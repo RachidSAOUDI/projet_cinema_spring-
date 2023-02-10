@@ -4,7 +4,6 @@ import org.springframework.data.rest.core.config.Projection;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 @Projection(name = "p1",types ={Presentation.class})
 public interface ProjectionPresentation {

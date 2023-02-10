@@ -22,7 +22,7 @@ public class Film {
     private String photo;
     @OneToMany(mappedBy = "film")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Collection<Projection> projections;
+    private Collection<Presentation> presentations;
     @ManyToOne
     private Categorie categorie;
 }

@@ -11,17 +11,17 @@ import java.util.Date;
 
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
-public class Projection {
+public class Presentation {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date dateProjection;
+    private Date datePresentation;
     private double prix;
     @ManyToOne
     private Film film;
     @ManyToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Salle salle;
-    @OneToMany(mappedBy = "projection")
+    @OneToMany(mappedBy = "presentation")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Collection<Ticket> tickets;
     @ManyToOne

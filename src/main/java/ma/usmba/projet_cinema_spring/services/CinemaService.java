@@ -8,6 +8,6 @@ public interface CinemaService {
     void initSeances();
     void initCatgories();
     void initFilms();
-    void initProjections();
+    void initPresentations();
     void initTickets();
 }

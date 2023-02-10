@@ -23,5 +23,5 @@ public class Salle {
     private Collection<Place> places;
     @OneToMany(mappedBy = "salle")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Collection<Projection> projections;
+    private Collection<Presentation> presentations;
 }

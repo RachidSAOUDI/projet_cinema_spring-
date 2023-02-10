@@ -1,15 +1,19 @@
 package ma.usmba.projet_cinema_spring;
 
+import ma.usmba.projet_cinema_spring.entities.Film;
 import ma.usmba.projet_cinema_spring.services.CinemaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 
 @SpringBootApplication
 public class ProjetCinemaSpringApplication implements CommandLineRunner {
     @Autowired
     private CinemaService cinemaService;
+    @Autowired
+    private RepositoryRestConfiguration restConfiguration;
 
     public static void main(String[] args) {
         SpringApplication.run(ProjetCinemaSpringApplication.class, args);
@@ -17,6 +21,7 @@ public class ProjetCinemaSpringApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        restConfiguration.exposeIdsFor(Film.class);
         cinemaService.initVilles();
         cinemaService.initCinemas();
         cinemaService.initSalles();
@@ -24,7 +29,7 @@ public class ProjetCinemaSpringApplication implements CommandLineRunner {
         cinemaService.initSeances();
         cinemaService.initCatgories();
         cinemaService.initFilms();
-        cinemaService.initProjections();
+        cinemaService.initPresentations();
         cinemaService.initTickets();
     }
 }

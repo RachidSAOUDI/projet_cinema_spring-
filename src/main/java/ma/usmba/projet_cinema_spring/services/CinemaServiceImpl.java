@@ -30,7 +30,7 @@ public class CinemaServiceImpl implements CinemaService {
     @Autowired
     private FilmRepository filmRepository;
     @Autowired
-    private ProjectionRepository projectionRepository;
+    private PresentationRepository presentationRepository;
     @Autowired
     private CategorieRepository categorieRepository;
     @Autowired
@@ -125,20 +125,20 @@ public class CinemaServiceImpl implements CinemaService {
     }
 
     @Override
-    public void initProjections() {
+    public void initPresentations() {
         double[] prices=new double[] {30,50,60,70,90};
         villeRepository.findAll().forEach(ville -> {
             ville.getCinemas().forEach(cinema -> {
                 cinema.getSalles().forEach(salle -> {
                     filmRepository.findAll().forEach(film -> {
                         seanceRepository.findAll().forEach(seance -> {
-                            Projection projection=new Projection();
-                            projection.setDateProjection(new Date());
-                            projection.setFilm(film);
-                            projection.setPrix(prices[new Random().nextInt(prices.length)]);
-                            projection.setSalle(salle);
-                            projection.setSeance(seance);
-                            projectionRepository.save(projection);
+                            Presentation presentation =new Presentation();
+                            presentation.setDatePresentation(new Date());
+                            presentation.setFilm(film);
+                            presentation.setPrix(prices[new Random().nextInt(prices.length)]);
+                            presentation.setSalle(salle);
+                            presentation.setSeance(seance);
+                            presentationRepository.save(presentation);
                         });
                     });
                 });
@@ -148,12 +148,12 @@ public class CinemaServiceImpl implements CinemaService {
 
     @Override
     public void initTickets() {
-        projectionRepository.findAll().forEach(p -> {
+        presentationRepository.findAll().forEach(p -> {
             p.getSalle().getPlaces().forEach(place -> {
                 Ticket ticket=new Ticket();
                 ticket.setPlace(place);
                 ticket.setPrix(p.getPrix());
-                ticket.setProjection(p);
+                ticket.setPresentation(p);
                 ticket.setReserve(false);
                 ticketRepository.save(ticket);
             });
